@@ -15,10 +15,18 @@ module.exports = function(grunt) {
         src: 'src/index.html',
         dest: 'index.html'
       }
+    },
+
+    watch: {
+      scripts: {
+        files: 'src/*.*',
+        tasks: ['default']
+      }
     }
   });
 
   // Load plugin
+  grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-include-replace');
 
   // Tasks
