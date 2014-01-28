@@ -1,17 +1,119 @@
-<!doctype html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width" />
-  <title>dice</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <h1>Roll the dice</h1>
-  <ol class="dice"><!--li class=n1><ul class="dots"><li class="d0"></li><li></li></ul></li--></ol>
-  <a href="#" id="roll">roll</a>
+<!doctype html><html><head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width" /> <title>dice</title> <link rel="stylesheet" href="style.css" /> <style type="text/css"> 
+@charset "UTF-8";
 
-  <script src="script.js"></script>
-</head>
-</body>
-</html>
+body {
+  margin:0;
+  font-size:62.5%;
+  background:#000;
+  cursor:pointer;
+}
+#roll {
+  position:absolute; top:0;
+  width:100%; height:100%;
+  text-indent:-9999px;
+}
+
+h1 {
+  display:none;
+  color:#fff;
+  font-size:1em;
+}
+
+.dice, .dots {
+  margin:0; padding:0;
+  list-style:none;
+}
+.dice li {
+  display:inline-block;/*float:left;*/
+  margin:.1em; padding:.6em;
+  width:2.4em; height:2.4em;
+  font-size:2em;
+  background:#fff;
+  border-radius:20%;
+}
+
+.dots {
+  position:relative;
+  width:100%; height:100%;
+}
+.dots li {
+  position:absolute;
+  display:block;
+  width:.3em; height:.3em;
+  margin:0; padding:0;
+  font-size:2em;
+  background:#000;
+  border-radius:50%;
+}
+
+li.n1 { background:#d33; }
+li.n2 { background:#33d; }
+li.n3 { background:#3d3; }
+li.n4 { background:#dd3; }
+li.n5 { background:#d3d; }
+
+li.n1 .d0,
+li.n3 .d2,
+li.n5 .d4 {
+  top:50%; left:50%;
+  margin:-.15em 0 0 -.15em;
+}
+li.n4 .d1,
+li.n5 .d1,
+li.n6 .d1 {
+  top:0; right:0;
+}
+li.n2 .d1,
+li.n3 .d1,
+li.n4 .d2,
+li.n5 .d2,
+li.n6 .d3 {
+  bottom:0; right:0;
+}
+li.n4 .d3,
+li.n5 .d3,
+li.n6 .d4 {
+  bottom:0;
+}
+li.n6 .d2 {
+  top:50%; right:0;
+  margin-top:-.15em;
+}
+li.n6 .d5 {
+  top:50%;
+  margin-top:-.15em;
+}
+ </style></head><body> <h1>Roll the dice</h1> <ol class="dice"><!--li class=n1><ul class="dots"><li class="d0"></li><li></li></ul></li--></ol> <a href="#" id="roll">roll</a> <script> 
+var roll = function() {
+  return ~~(Math.random() * 6) + 1;
+};
+
+window.addEventListener('load', function(e) {
+
+var button = document.querySelector('body');
+var dice = document.querySelector('.dice');
+
+button.addEventListener('click', function(e) {
+  e.preventDefault();
+
+  var num = roll();
+
+  var dots = document.createElement('ul');
+  dots.className = 'dots';
+  
+  var face = document.createElement('li');
+  face.className = 'n'+num;
+  
+  for(var x=0; x<num; x++) {
+    var dot = document.createElement("li");
+    dot.className = 'd'+x;
+    dots.appendChild(dot);
+  }
+
+  face.appendChild(dots);
+  dice.appendChild(face);
+
+});
+  
+}, false);
+ </script></head></body></html>

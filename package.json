@@ -1,0 +1,17 @@
+{
+  "name": "roll-the-dice",
+  "title": "Roll the dice",
+  "version": "0.1.0",
+  "author": "Mat Harden <matharden@gmail.com>",
+  "description": "simple, single page dice rolling app",
+  "scripts": {},
+  "dependencies": {},
+  "engines": {
+    "node": ">=0.8"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-stencil": "~1.0.2"
+  }
+}

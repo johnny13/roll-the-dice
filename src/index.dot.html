@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width" />
+  <title>dice</title>
+  <link rel="stylesheet" href="style.css" />
+  <style type="text/css">
+  {{= it.include("src/style.css") }}
+  </style>
+</head>
+<body>
+  <h1>Roll the dice</h1>
+  <ol class="dice"><!--li class=n1><ul class="dots"><li class="d0"></li><li></li></ul></li--></ol>
+  <a href="#" id="roll">roll</a>
+
+  <script>
+  {{= it.include("src/script.js") }}
+  </script>
+</head>
+</body>
+</html>
