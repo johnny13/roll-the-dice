@@ -22,14 +22,19 @@ module.exports = function(grunt) {
         files: 'src/*.*',
         tasks: ['default']
       }
+    },
+
+    jshint: {
+      all: ['Gruntfile.js', 'src/**/*.js']
     }
   });
 
   // Load plugin
+  grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-include-replace');
 
   // Tasks
-  grunt.registerTask('default', ['includereplace']);
+  grunt.registerTask('default', ['jshint', 'includereplace']);
 
 };
