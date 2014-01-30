@@ -27,6 +27,12 @@ button.addEventListener('click', function(e) {
   face.appendChild(dots);
   dice.appendChild(face);
 
+  setTimeout(function(){
+    face.style.bottom = (~~(Math.random()*screen.height)+1)+"px";
+    face.style.left = (~~(Math.random()*screen.width)+1)+"px";
+    face.style['-webkit-transform'] = "rotate("+(~~(Math.random()*670)+1)+"deg)";
+  },5);
+
 });
   
 }, false);
