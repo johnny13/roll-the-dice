@@ -49,8 +49,11 @@ h1 {
   width:.3em; height:.3em;
   margin:0; padding:0;
   font-size:2em;
-  background:#000;
+  background:#fff;
   border-radius:50%;
+}
+.n6 .dots li {
+  background:#000;
 }
 
 li.n1 { background:#d33; }
