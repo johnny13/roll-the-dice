@@ -32,7 +32,7 @@ button.addEventListener('click', function(e) {
   setTimeout(function(){
     face.style.bottom = ~~(Math.random()*(document.documentElement.clientHeight-diameter))+"px";
     face.style.left = ~~(Math.random()*(document.documentElement.clientWidth-diameter))+"px";
-    face.style['-webkit-transform'] = "rotate("+(~~(Math.random()*670)+1)+"deg)";
+    face.style['-webkit-transform'] = "rotate("+(~~(Math.random()*1340)-670)+"deg)";
   },5);
 
 });
