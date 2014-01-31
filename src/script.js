@@ -10,6 +10,10 @@ var dice = document.querySelector('.dice');
 button.addEventListener('click', function(e) {
   e.preventDefault();
 
+  for (var i=0; i<dice.childNodes.length; i++) {
+    dice.removeChild(dice.childNodes[i]);
+  }
+
   var num = roll();
 
   var dots = document.createElement('ul');
