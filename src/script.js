@@ -27,9 +27,11 @@ button.addEventListener('click', function(e) {
   face.appendChild(dots);
   dice.appendChild(face);
 
+  var diameter = face.offsetWidth;
+
   setTimeout(function(){
-    face.style.bottom = (~~(Math.random()*screen.height)+1)+"px";
-    face.style.left = (~~(Math.random()*screen.width)+1)+"px";
+    face.style.bottom = ~~(Math.random()*(document.documentElement.clientHeight-diameter))+"px";
+    face.style.left = ~~(Math.random()*(document.documentElement.clientWidth-diameter))+"px";
     face.style['-webkit-transform'] = "rotate("+(~~(Math.random()*670)+1)+"deg)";
   },5);
 
