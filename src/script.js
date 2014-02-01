@@ -7,18 +7,22 @@ button.addEventListener('click', function(e){
 
   var y = 0, x, d = document,
       num, die, dots, dot, diameter,
-      rand, randomise;
+      rand, randomise, el;
 
   rand = function(factor){
     return ~~(Math.random() * factor) + 1;
   };
 
   randomise = function(){
-    die.style.bottom = rand(document.documentElement.clientHeight-diameter)+"px";
-    die.style.left = rand(document.documentElement.clientWidth-diameter)+"px";
+    die.style.bottom = rand(d.documentElement.clientHeight-diameter)+"px";
+    die.style.left = rand(d.documentElement.clientWidth-diameter)+"px";
     die.style['-webkit-transform'] = "rotate("+(rand(1340)-670)+"deg)";
   };
 
+  el = function(e){
+    return d.createElement(e);
+  };
+  
   while (dice.childNodes.length > 0){
     dice.removeChild(dice.childNodes[0]);
   }
@@ -27,14 +31,14 @@ button.addEventListener('click', function(e){
 
     num = rand(6);
 
-    dots = document.createElement('ul');
+    dots = el('ul');
     dots.className = 'dots';
     
-    die = document.createElement('li');
+    die = el('li');
     die.className = 'n'+num;
     
     for (x=0; x<num; x++){
-      dot = document.createElement("li");
+      dot = el("li");
       dot.className = 'd'+x;
       dots.appendChild(dot);
     }
