@@ -8,6 +8,7 @@
   @charset "UTF-8";
 
 body {
+  overflow:hidden;
   margin:0;
   font-size:62.5%;
   background:#000;
@@ -17,6 +18,9 @@ body {
   position:absolute; top:0;
   width:100%; height:100%;
   text-indent:-9999px;
+}
+input {
+  position:relative; z-index:10;
 }
 
 h1 {
@@ -33,7 +37,7 @@ h1 {
   display:inline-block;
   margin:.1em; padding:.6em;
   width:2.4em; height:2.4em;
-  font-size:2em;
+  font-size:4em;
   background:#fff;
   border-radius:20%;
 
@@ -105,6 +109,7 @@ li.n6 .d5 {
 </head>
 <body>
   <h1>Roll the dice</h1>
+  <input type="range" min="1" max="6" step="1" value="1" id="slider">
   <ol class="dice"><!--li class=n1><ul class="dots"><li class="d0"></li><li></li></ul></li--></ol>
   <a href="#" id="roll">roll</a>
   
@@ -117,34 +122,48 @@ window.addEventListener('load', function(e) {
 
 var button = document.querySelector('body');
 var dice = document.querySelector('.dice');
+var slider = document.querySelector('#slider');
 
 button.addEventListener('click', function(e) {
   e.preventDefault();
 
-  var num = roll();
+  var y = 0;
 
-  var dots = document.createElement('ul');
-  dots.className = 'dots';
-  
-  var face = document.createElement('li');
-  face.className = 'n'+num;
-  
-  for(var x=0; x<num; x++) {
-    var dot = document.createElement("li");
-    dot.className = 'd'+x;
-    dots.appendChild(dot);
-  }
-
-  face.appendChild(dots);
-  dice.appendChild(face);
-
-  var diameter = face.offsetWidth;
-
-  setTimeout(function(){
+  var randomise = function(){
     face.style.bottom = ~~(Math.random()*(document.documentElement.clientHeight-diameter))+"px";
     face.style.left = ~~(Math.random()*(document.documentElement.clientWidth-diameter))+"px";
-    face.style['-webkit-transform'] = "rotate("+(~~(Math.random()*670)+1)+"deg)";
-  },5);
+    face.style['-webkit-transform'] = "rotate("+(~~(Math.random()*1340)-670)+"deg)";
+  };
+  
+  while (dice.childNodes.length > 0) {
+    dice.removeChild(dice.childNodes[0]);
+  }
+
+  while (y < slider.value) {
+
+    var num = roll();
+
+    var dots = document.createElement('ul');
+    dots.className = 'dots';
+    
+    var face = document.createElement('li');
+    face.className = 'n'+num;
+    
+    for(var x=0; x<num; x++) {
+      var dot = document.createElement("li");
+      dot.className = 'd'+x;
+      dots.appendChild(dot);
+    }
+
+    face.appendChild(dots);
+    dice.appendChild(face);
+
+    var diameter = face.offsetWidth;
+
+    setTimeout(randomise(), 5);
+
+    y++;
+  }
 
 });
   
