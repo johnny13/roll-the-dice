@@ -1,32 +1,24 @@
 <!doctype html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Roll the dice</title>
   <style type="text/css">
-  @charset "UTF-8";
-
-body {
+  body {
   overflow:hidden;
   margin:0;
   font-size:62.5%;
   background:#000;
-  cursor:pointer;
 }
 #roll {
   position:absolute; top:0;
   width:100%; height:100%;
   text-indent:-9999px;
+  cursor:pointer;
 }
 input {
   position:relative; z-index:10;
-}
-
-h1 {
-  display:none;
-  color:#fff;
-  font-size:1em;
 }
 
 .dice, .dots {
@@ -96,69 +88,68 @@ li.n5 .d3,
 li.n6 .d4 {
   top:auto; bottom:0;
 }
-li.n6 .d2 {
-  top:50%; left:auto; right:0;
-  margin-top:-.15em;
-}
+li.n6 .d2,
 li.n6 .d5 {
   top:50%;
   margin-top:-.15em;
+}
+li.n6 .d2 {
+  left:auto; right:0;
 }
 
   </style>
 </head>
 <body>
-  <h1>Roll the dice</h1>
-  <input type="range" min="1" max="6" step="1" value="1" id="slider">
-  <ol class="dice"><!--li class=n1><ul class="dots"><li class="d0"></li><li></li></ul></li--></ol>
+  <input type="range" min="1" max="6" step="1" value="1" id="quantity" />
+  <ol class="dice"></ol>
   <a href="#" id="roll">roll</a>
   
   <script>
-  var roll = function() {
-  return ~~(Math.random() * 6) + 1;
-};
+  var button = document.querySelector('body'),
+    dice = document.querySelector('.dice'),
+    quantity = document.querySelector('#quantity');
 
-window.addEventListener('load', function(e) {
-
-var button = document.querySelector('body');
-var dice = document.querySelector('.dice');
-var slider = document.querySelector('#slider');
-
-button.addEventListener('click', function(e) {
+button.addEventListener('click', function(e){
   e.preventDefault();
 
-  var y = 0;
+  var y = 0, x = 0,
+      num, die, dots, dot, diameter,
+      rand, randomise;
 
-  var randomise = function(){
-    face.style.bottom = ~~(Math.random()*(document.documentElement.clientHeight-diameter))+"px";
-    face.style.left = ~~(Math.random()*(document.documentElement.clientWidth-diameter))+"px";
-    face.style['-webkit-transform'] = "rotate("+(~~(Math.random()*1340)-670)+"deg)";
+  rand = function(factor){
+    return ~~(Math.random() * factor) + 1;
   };
-  
-  while (dice.childNodes.length > 0) {
+
+  randomise = function(){
+    die.style.bottom = rand(document.documentElement.clientHeight-diameter)+"px";
+    die.style.left = rand(document.documentElement.clientWidth-diameter)+"px";
+    die.style['-webkit-transform'] = "rotate("+(rand(1340)-670)+"deg)";
+  };
+
+  while (dice.childNodes.length > 0){
     dice.removeChild(dice.childNodes[0]);
   }
 
-  while (y < slider.value) {
+  while (y < quantity.value){
 
-    var num = roll();
+    num = rand(6);
 
-    var dots = document.createElement('ul');
+    dots = document.createElement('ul');
     dots.className = 'dots';
     
-    var face = document.createElement('li');
-    face.className = 'n'+num;
+    die = document.createElement('li');
+    die.className = 'n'+num;
     
-    for(var x=0; x<num; x++) {
-      var dot = document.createElement("li");
+    for (x; x<num; x++){
+      dot = document.createElement("li");
       dot.className = 'd'+x;
       dots.appendChild(dot);
     }
 
-    face.appendChild(dots);
-    dice.appendChild(face);
+    die.appendChild(dots);
+    dice.appendChild(die);
 
-    var diameter = face.offsetWidth;
+    diameter = die.offsetWidth;
 
     setTimeout(randomise(), 5);
 
@@ -166,8 +157,6 @@ button.addEventListener('click', function(e) {
   }
 
 });
-  
-}, false);
 
   </script>
 </head>

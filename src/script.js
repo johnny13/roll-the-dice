@@ -1,48 +1,48 @@
-var roll = function() {
-  return ~~(Math.random() * 6) + 1;
-};
+var button = document.querySelector('body'),
+    dice = document.querySelector('.dice'),
+    quantity = document.querySelector('#quantity');
 
-window.addEventListener('load', function(e) {
-
-var button = document.querySelector('body');
-var dice = document.querySelector('.dice');
-var slider = document.querySelector('#slider');
-
-button.addEventListener('click', function(e) {
+button.addEventListener('click', function(e){
   e.preventDefault();
 
-  var y = 0;
+  var y = 0, x, d = document,
+      num, die, dots, dot, diameter,
+      rand, randomise;
 
-  var randomise = function(){
-    face.style.bottom = ~~(Math.random()*(document.documentElement.clientHeight-diameter))+"px";
-    face.style.left = ~~(Math.random()*(document.documentElement.clientWidth-diameter))+"px";
-    face.style['-webkit-transform'] = "rotate("+(~~(Math.random()*1340)-670)+"deg)";
+  rand = function(factor){
+    return ~~(Math.random() * factor) + 1;
   };
-  
-  while (dice.childNodes.length > 0) {
+
+  randomise = function(){
+    die.style.bottom = rand(document.documentElement.clientHeight-diameter)+"px";
+    die.style.left = rand(document.documentElement.clientWidth-diameter)+"px";
+    die.style['-webkit-transform'] = "rotate("+(rand(1340)-670)+"deg)";
+  };
+
+  while (dice.childNodes.length > 0){
     dice.removeChild(dice.childNodes[0]);
   }
 
-  while (y < slider.value) {
+  while (y < quantity.value){
 
-    var num = roll();
+    num = rand(6);
 
-    var dots = document.createElement('ul');
+    dots = document.createElement('ul');
     dots.className = 'dots';
     
-    var face = document.createElement('li');
-    face.className = 'n'+num;
+    die = document.createElement('li');
+    die.className = 'n'+num;
     
-    for(var x=0; x<num; x++) {
-      var dot = document.createElement("li");
+    for (x=0; x<num; x++){
+      dot = document.createElement("li");
       dot.className = 'd'+x;
       dots.appendChild(dot);
     }
 
-    face.appendChild(dots);
-    dice.appendChild(face);
+    die.appendChild(dots);
+    dice.appendChild(die);
 
-    var diameter = face.offsetWidth;
+    diameter = die.offsetWidth;
 
     setTimeout(randomise(), 5);
 
@@ -50,5 +50,3 @@ button.addEventListener('click', function(e) {
   }
 
 });
-  
-}, false);
