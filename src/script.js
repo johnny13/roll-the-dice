@@ -1,12 +1,13 @@
-var button = document.querySelector('body'),
+var button = document.querySelector('#roll'),
     dice = document.querySelector('.dice'),
-    quantity = document.querySelector('#quantity');
+    quantity = document.querySelector('#quantity'),
+    total = document.querySelector('b');
 
 button.addEventListener('click', function(e){
   e.preventDefault();
 
   var y = 0, x, d = document,
-      num, die, dots, dot, diameter,
+      num, die, dots, dot, diameter, sum,
       rand, randomise, el;
 
   rand = function(factor){
@@ -23,6 +24,8 @@ button.addEventListener('click', function(e){
     return d.createElement(e);
   };
   
+  sum = 0;
+  
   while (dice.childNodes.length > 0){
     dice.removeChild(dice.childNodes[0]);
   }
@@ -30,6 +33,8 @@ button.addEventListener('click', function(e){
   while (y < quantity.value){
 
     num = rand(6);
+
+    sum+= num;
 
     dots = el('ul');
     dots.className = 'dots';
@@ -52,5 +57,7 @@ button.addEventListener('click', function(e){
 
     y++;
   }
+
+  total.innerHTML = sum;
 
 });
