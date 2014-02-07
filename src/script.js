@@ -1,14 +1,20 @@
 var button = document.querySelector('#roll'),
     dice = document.querySelector('.dice'),
     quantity = document.querySelector('#quantity'),
-    total = document.querySelector('b');
+    total = document.querySelector('b'),
+    help = document.querySelector('p');
 
 button.addEventListener('click', function(e){
   e.preventDefault();
 
-  var y = 0, x, d = document,
+  var y = 0, x, d = document, hidden = false,
       num, die, dots, dot, diameter, sum,
-      rand, randomise, el;
+      hideHelp, rand, randomise, el;
+
+  hideHelp = function(){
+    if (hidden) return;
+    help.className = 'hide';
+  };
 
   rand = function(factor){
     return ~~(Math.random() * factor) + 1;
@@ -25,6 +31,8 @@ button.addEventListener('click', function(e){
   };
   
   sum = 0;
+
+  hideHelp();
   
   while (dice.childNodes.length > 0){
     dice.removeChild(dice.childNodes[0]);

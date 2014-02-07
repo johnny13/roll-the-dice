@@ -18,17 +18,21 @@
   cursor:pointer;
 }
 p {
-  position:relative; z-index:1;
-  margin:0; padding:.5em 1em;
-  color:#fff; font-size:1.6em;
-  text-align:right;
-  background:rgba(255,255,255,.1);
+  position:absolute; z-index:1; top:50%;
+  width:100%;
+  margin:0;
+  color:#fff; font-size:3em;
+  text-align:center;
+  -webkit-transition:opacity 1s;
+}
+p.hide {
+  opacity:0;
 }
 input {
-  position:absolute; top:.5em; z-index:3;
+  position:absolute; top:.5em; left:1em; z-index:3;
 }
 b {
-  position:absolute; top:1.5em; right:1em; z-index:1;
+  position:absolute; top:1em; right:1em; z-index:1;
   font-size:5em; font-weight:bold;
   color:#d0d0d0;
   text-shadow:2px 2px 0 #000;
@@ -122,14 +126,20 @@ li.n6 .d2 {
   var button = document.querySelector('#roll'),
     dice = document.querySelector('.dice'),
     quantity = document.querySelector('#quantity'),
-    total = document.querySelector('b');
+    total = document.querySelector('b'),
+    help = document.querySelector('p');
 
 button.addEventListener('click', function(e){
   e.preventDefault();
 
-  var y = 0, x, d = document,
+  var y = 0, x, d = document, hidden = false,
       num, die, dots, dot, diameter, sum,
-      rand, randomise, el;
+      hideHelp, rand, randomise, el;
+
+  hideHelp = function(){
+    if (hidden) return;
+    help.className = 'hide';
+  };
 
   rand = function(factor){
     return ~~(Math.random() * factor) + 1;
@@ -146,6 +156,8 @@ button.addEventListener('click', function(e){
   };
   
   sum = 0;
+
+  hideHelp();
   
   while (dice.childNodes.length > 0){
     dice.removeChild(dice.childNodes[0]);
