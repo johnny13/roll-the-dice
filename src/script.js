@@ -12,7 +12,7 @@ button.addEventListener('click', function(e){
       hideHelp, rand, randomise, el;
 
   hideHelp = function(){
-    if (hidden) return;
+    if (hidden) { return; }
     help.className = 'hide';
   };
 
@@ -21,9 +21,9 @@ button.addEventListener('click', function(e){
   };
 
   randomise = function(){
-    die.style.bottom = rand(d.documentElement.clientHeight-diameter)+"px";
-    die.style.left = rand(d.documentElement.clientWidth-diameter)+"px";
-    die.style['-webkit-transform'] = "rotate("+(rand(1340)-670)+"deg)";
+    die.style.bottom = rand(d.documentElement.clientHeight-diameter)+'px';
+    die.style.left = rand(d.documentElement.clientWidth-diameter)+'px';
+    die.style['-webkit-transform'] = 'rotate('+(rand(1340)-670)+'deg)';
   };
 
   el = function(e){
@@ -51,7 +51,7 @@ button.addEventListener('click', function(e){
     die.className = 'n'+num;
     
     for (x=0; x<num; x++){
-      dot = el("li");
+      dot = el('li');
       dot.className = 'd'+x;
       dots.appendChild(dot);
     }
